@@ -46,7 +46,7 @@ async function loadLivePlaces(query) {
       category: place.primaryTypeDisplayName?.text || place.primaryType || place.category || "Empresa local",
       address: place.formattedAddress || "Endereço não informado",
       icon: "•",
-      status: "Fonte oficial",
+      status: "Fonte aberta OSM",
       query: query,
     }));
     state.live = true;
