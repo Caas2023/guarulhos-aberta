@@ -6,10 +6,8 @@ Diretório local de empresas e serviços de Guarulhos/SP.
 
 - Interface responsiva criada.
 - Busca, filtros por categoria e fallback demonstrativo funcionando no navegador.
-- Consulta ao endpoint local pode usar OpenStreetMap/Overpass como fonte aberta de fallback; interface deve mostrar fonte, licença, data e cobertura limitada.
-- Segredo protegido por `GOOGLE_MAPS_API_KEY`; nunca incluir chave no Git.
-- Dados demonstrativos aparecem enquanto a API não estiver configurada.
-- Não afirmar cobertura total: Google Places retorna resultados por consulta, área, paginação e quota.
+- Consulta ao endpoint local pode usar OpenStreetMap/Overpass como fonte aberta de fallback; interface mostra fonte, licença, data e cobertura limitada.
+- Não afirmar cobertura total: OSM depende do que foi mapeado e não representa todas as empresas.
 
 ## Desenvolvimento local
 
@@ -21,20 +19,19 @@ python -m http.server 4173
 
 Acesse `http://localhost:4173`.
 
-Para endpoint ao vivo, deploy em Vercel e configure `GOOGLE_MAPS_API_KEY` no painel/CLI. O arquivo `.env.example` não contém segredo.
+Para endpoint ao vivo, deploy em Vercel. O fallback OSM não exige chave. O arquivo `.env.example` é apenas referência e não contém segredo.
 
 ## Deploy
 
 1. Criar repositório GitHub `guarulhos-aberta`.
 2. Subir arquivos deste diretório.
-3. Importar repositório na Vercel.
-4. Adicionar `GOOGLE_MAPS_API_KEY` como Environment Variable em Preview e Production.
-5. Restringir a chave no Google Cloud por API, domínio e quota.
-6. Testar `/api/places?query=óticas` e a busca da interface.
+3. Importar o repositório na Vercel.
+4. Testar `/api/places?query=óticas` e a busca da interface.
+5. Monitorar limites do Overpass e, para volume, usar provedor/instância OSM autorizada.
 
 ## Compliance
 
-Usar Google Places API oficial. Não raspar Google Maps. Conferir preços, quota, FieldMask, atribuição, armazenamento e termos atuais antes de publicar base persistente. Exibir fonte e data de atualização. Oferecer canal para correção/remoção.
+Não raspar Google Maps. Dados Google só devem entrar via API oficial autorizada, quando configurada. O fallback usa OpenStreetMap/Overpass sob ODbL, com atribuição e cobertura limitada. Oferecer correção/remoção e não publicar dados pessoais sem base legal.
 
 ## Design
 
@@ -43,4 +40,8 @@ Usar Google Places API oficial. Não raspar Google Maps. Conferir preços, quota
 - Azul-petróleo: `#123b4a`
 - Ação: laranja `#ee7044`
 - Status: verde `#4e9c72`
-- Direção: editorial urbano, mapa noturno, mobile-first, escaneável.
+## Limitações pendentes
+
+- GitHub remoto não configurado nesta sessão: não há token/remote autenticado.
+- Vercel não publicado: CLI instalada, mas sessão está deslogada.
+- Google Business não importado: sem API oficial e sem autorização para exportação por scraping.

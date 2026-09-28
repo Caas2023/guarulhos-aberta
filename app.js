@@ -43,7 +43,7 @@ async function loadLivePlaces(query) {
     if (!Array.isArray(payload.places)) throw new Error("Resposta inválida");
     state.places = payload.places.map((place) => ({
       name: place.displayName?.text || place.name || "Empresa sem nome",
-      category: place.primaryTypeDisplayName?.text || place.primaryType || "Empresa local",
+      category: place.primaryTypeDisplayName?.text || place.primaryType || place.category || "Empresa local",
       address: place.formattedAddress || "Endereço não informado",
       icon: "•",
       status: "Fonte oficial",
