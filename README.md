@@ -6,7 +6,7 @@ Diretório local de empresas e serviços de Guarulhos/SP.
 
 - Interface responsiva criada.
 - Busca, filtros por categoria e fallback demonstrativo funcionando no navegador.
-- Endpoint serverless preparado para Google Places API (New).
+- Consulta ao endpoint local pode usar OpenStreetMap/Overpass como fonte aberta de fallback; interface deve mostrar fonte, licença, data e cobertura limitada.
 - Segredo protegido por `GOOGLE_MAPS_API_KEY`; nunca incluir chave no Git.
 - Dados demonstrativos aparecem enquanto a API não estiver configurada.
 - Não afirmar cobertura total: Google Places retorna resultados por consulta, área, paginação e quota.

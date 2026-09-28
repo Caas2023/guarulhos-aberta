@@ -30,8 +30,8 @@ function render() {
       <p class="address">⌖ ${esc(place.address)}</p>
     </article>
   `).join("") : `<p class="empty">Nenhum resultado encontrado. Tente outra categoria ou bairro.</p>`;
-  meta.textContent = state.live ? "Google Places API · consulta atual · fonte oficial" : "Dados demonstrativos · API oficial ainda não configurada";
-  status.textContent = state.live ? `${filtered.length} resultado(s) encontrados.` : `${filtered.length} exemplo(s) exibidos. Configure a API para consultar dados ao vivo.`;
+  meta.textContent = state.live ? "OpenStreetMap · consulta atual · dados sob licença ODbL" : "Dados demonstrativos · fonte aberta ainda não consultada";
+  status.textContent = state.live ? `${filtered.length} resultado(s) encontrados.` : `${filtered.length} exemplo(s) exibidos. Clique em uma categoria para consultar a fonte aberta.`;
 }
 
 async function loadLivePlaces(query) {
