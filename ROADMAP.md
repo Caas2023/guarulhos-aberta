@@ -19,6 +19,15 @@ Atualizado em 29/09/2026.
 - GitHub remoto: pendente de autenticação/configuração.
 - Vercel: CLI instalada; sessão deslogada.
 
+## Escala nacional
+
+Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as aproximadamente 5.570 cidades brasileiras:
+
+- Rotas: `/estado/cidade/categoria/empresa`.
+- Localidade identificada por código IBGE, UF, município e slug.
+- Banco, SEO, sitemap, cadastro e reivindicação não podem codificar Guarulhos como constante global.
+- Nome nacional ainda precisa validação no INPI e Registro.br. “Guarulhos Aberta” permanece nome da implantação piloto.
+
 ## Fases
 
 ### Fase 1 — Fundação
