@@ -45,7 +45,8 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 
 ### Fase 2 — Catálogo
 
-- [ ] Modelo persistente de empresa.
+- [x] Modelo nacional de localidade com IDs IBGE e slugs separados (`data/localities.json`, `lib/localities.js`).
+- Modelo persistente empresa.
 - [ ] Categorias e bairros canônicos.
 - [ ] Página individual por empresa.
 - [ ] Página por categoria e bairro.

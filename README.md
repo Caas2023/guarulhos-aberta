@@ -21,6 +21,16 @@ Acesse `http://localhost:4173`.
 
 Para endpoint ao vivo, deploy em Vercel. O fallback OSM não exige chave. O arquivo `.env.example` é apenas referência e não contém segredo.
 
+## Modelo nacional de localidade
+
+O piloto usa `municipalityId` e `stateId` do IBGE, mantendo nomes exibidos separados dos slugs de URL. `lib/localities.js` valida o catálogo e gera a hierarquia `/estado/cidade/categoria/empresa`, permitindo adicionar municípios sem alterar a estrutura.
+
+Testes do modelo:
+
+```bash
+node --test
+```
+
 ## Deploy
 
 1. Criar repositório GitHub `guarulhos-aberta`.
