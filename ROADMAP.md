@@ -55,15 +55,15 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - [ ] Importador OSM paginado com deduplicação.
 - [ ] Atualização periódica e registro de fonte/data.
 
-### Fase 3 — Cadastro e conta
+### Fase 3 Cadastro conta
 
-- [ ] Login seguro.
-- [ ] Cadastro de usuário.
-- [ ] Cadastro de empresa.
-- [ ] Reivindicação de empresa existente.
-- [ ] Verificação por e-mail/domínio/documentação.
-- [ ] Painel do empresário.
-- [ ] Correção, remoção e trilha de auditoria.
+- Login seguro.
+- Cadastro usuário.
+- Cadastro empresa.
+- [x] Reivindicação e solicitação de correção de empresa existente com validação IBGE nacional (`lib/claim_submission.js` e `api/claim.js`).
+- Verificação por e-mail/domínio/documentação.
+- Painel empresário.
+- [x] Correção, remoção e trilha de auditoria estruturada (pending_verification com sanitização e CNPJ).
 
 ### Fase 4 — Receita
 
