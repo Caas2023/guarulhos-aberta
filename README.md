@@ -1,12 +1,14 @@
 # Guarulhos Aberta
 
-Diretório local de empresas e serviços de Guarulhos/SP.
+Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 
 ## Estado atual
 
-- Interface responsiva criada.
-- Busca, filtros por categoria e fallback demonstrativo funcionando no navegador.
-- Consulta ao endpoint local pode usar OpenStreetMap/Overpass como fonte aberta de fallback; interface mostra fonte, licença, data e cobertura limitada.
+- Interface responsiva com busca, filtros por categoria e cards de empresas.
+- Base real: 1.502 registros do município de Guarulhos obtidos de OpenStreetMap/Overpass.
+- Contatos encontrados: 379 telefones, 377 links WhatsApp, 155 sites e 1.061 endereços.
+- Cards mostram telefone, WhatsApp, site e mapa quando o dado existe na fonte.
+- Fonte, licença ODbL, data e cobertura limitada devem permanecer visíveis.
 - Não afirmar cobertura total: OSM depende do que foi mapeado e não representa todas as empresas.
 
 ## Desenvolvimento local
@@ -19,39 +21,36 @@ python -m http.server 4173
 
 Acesse `http://localhost:4173`.
 
-Para endpoint ao vivo, deploy em Vercel. O fallback OSM não exige chave. O arquivo `.env.example` é apenas referência e não contém segredo.
+## Modelo nacional
 
-## Modelo nacional de localidade
+O piloto usa código IBGE, nomes separados de slugs e rotas `/estado/cidade/categoria/empresa`, permitindo adicionar municípios sem reescrever a estrutura.
 
-O piloto usa `municipalityId` e `stateId` do IBGE, mantendo nomes exibidos separados dos slugs de URL. `lib/localities.js` valida o catálogo e gera a hierarquia `/estado/cidade/categoria/empresa`, permitindo adicionar municípios sem alterar a estrutura.
-
-Testes do modelo:
+## Testes
 
 ```bash
-node --test
+node --test test/company.test.js test/localities.test.js test/routing.test.js test/schema_generator.test.js
 ```
 
 ## Deploy
 
-1. Criar repositório GitHub `guarulhos-aberta`.
-2. Subir arquivos deste diretório.
-3. Importar o repositório na Vercel.
-4. Testar `/api/places?query=óticas` e a busca da interface.
-5. Monitorar limites do Overpass e, para volume, usar provedor/instância OSM autorizada.
+1. Importar este repositório na Vercel.
+2. Testar homepage, busca, dados reais e endpoints.
+3. Monitorar limites do Overpass e, para volume, usar provedor/instância OSM autorizada.
 
 ## Compliance
 
-Não raspar Google Maps. Dados Google só devem entrar via API oficial autorizada, quando configurada. O fallback usa OpenStreetMap/Overpass sob ODbL, com atribuição e cobertura limitada. Oferecer correção/remoção e não publicar dados pessoais sem base legal.
+Não raspar Google Maps. Dados Google só entram via API oficial autorizada. Fallback usa OpenStreetMap/Overpass sob ODbL, com atribuição e cobertura limitada. Oferecer correção/remoção e não publicar dados pessoais sem base legal.
 
-## Design
+## Marca piloto
 
 - Nome: Guarulhos Aberta
-- Fundo: marfim `#f7f4ed`
-- Azul-petróleo: `#123b4a`
-- Ação: laranja `#ee7044`
-- Status: verde `#4e9c72`
-## Limitações pendentes
+- Fundo: marfim `#f7f4ed` na proposta original
+- Implementação atual: interface escura com roxo para melhor leitura de cards
 
-- GitHub remoto não configurado nesta sessão: não há token/remote autenticado.
-- Vercel não publicado: CLI instalada, mas sessão está deslogada.
-- Google Business não importado: sem API oficial e sem autorização para exportação por scraping.
+## Pendências
+
+- Deploy Vercel.
+- Expansão para outras cidades brasileiras.
+- Cadastro/reivindicação de empresas.
+- Atualização periódica da base.
+
