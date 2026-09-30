@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://guarulhos-aberta.vercel.app/sitemap.xml
