@@ -1,114 +1,176 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Guarulhos Aberta: diretório local de empresas e serviços de Guarulhos, com busca por categoria e bairro.">
-    <meta name="theme-color" content="#123b4a">
-    <title>Guarulhos Aberta — empresas da cidade</title>
-    <link rel="stylesheet" href="/styles.css">
-  </head>
-  <body>
-    <header class="topbar">
-      <a class="brand" href="/" aria-label="Guarulhos Aberta, página inicial">
-        <span class="brand-mark" aria-hidden="true">G</span>
-        <span><strong>Guarulhos</strong> Aberta</span>
-      </a>
-      <nav aria-label="Navegação principal">
-        <a href="#explorar">Explorar</a>
-        <a href="#como-funciona">Como funciona</a>
-        <a class="nav-cta" href="#cadastrar">Corrigir cadastro</a>
-      </nav>
-    </header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guarulhos Aberta - 2000+ Empresas em Guarulhos/SP</title>
+  <meta name="description" content="Diretorio com 2000+ empresas reais de Guarulhos SP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0f0f13;color:#e8e8ef;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.container{max-width:1280px;margin:0 auto;padding:0 20px}
+.site-header{background:#17171f;border-bottom:1px solid #2a2a38;padding:14px 0;position:sticky;top:0;z-index:100}
+.site-header .container{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-size:1.15rem}
+.logo strong{color:#6c63ff}
+.site-nav{display:flex;gap:20px;font-size:.9rem;color:#aaa}
+.site-nav a:hover{color:#fff}
+.hero{background:linear-gradient(135deg,#17172a 0%,#1e1435 100%);padding:64px 0 48px;text-align:center}
+.hero h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.2;margin-bottom:12px}
+.highlight{color:#6c63ff}
+.hero-sub{color:#aaa;font-size:1.05rem;margin-bottom:32px}
+.search-wrap{display:flex;max-width:600px;margin:0 auto 16px;border-radius:12px;overflow:hidden;box-shadow:0 0 0 2px #6c63ff}
+.search-wrap input{flex:1;padding:16px 20px;border:none;background:#1e1e2f;color:#fff;font-size:1rem;outline:none}
+.search-wrap input::placeholder{color:#666}
+.search-wrap button{padding:16px 24px;background:#6c63ff;color:#fff;border:none;cursor:pointer;font-size:1rem;font-weight:600}
+.search-wrap button:hover{background:#7d75ff}
+.stats-bar{font-size:.82rem;color:#666;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.section-cats{padding:40px 0}
+.section-cats h2,.section-list h2{font-size:1.3rem;font-weight:700;margin-bottom:20px}
+.cat-grid{display:flex;flex-wrap:wrap;gap:10px}
+.cat-pill{background:#1e1e2f;border:1px solid #2e2e45;color:#ccc;padding:10px 16px;border-radius:50px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-size:.88rem;transition:all .15s}
+.cat-pill:hover,.cat-pill.active{background:#6c63ff;border-color:#6c63ff;color:#fff}
+.cat-count{background:#0f0f1a;color:#888;font-size:.75rem;padding:2px 7px;border-radius:20px}
+.cat-pill.active .cat-count{background:#5550dd;color:#fff}
+.section-list{padding:40px 0 60px}
+.list-header{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.result-count{color:#888;font-size:.9rem}
+.company-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.company-card{background:#17171f;border:1px solid #2a2a38;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s}
+.company-card:hover{border-color:#6c63ff}
+.card-cat-badge{font-size:.75rem;color:#6c63ff;font-weight:600}
+.card-name{font-size:1rem;font-weight:700;line-height:1.3;color:#f0f0f8}
+.card-addr{font-size:.8rem;color:#888;line-height:1.5}
+.card-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.btn-contact{font-size:.78rem;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap;transition:.15s}
+.btn-wp{background:#128c7e;color:#fff}.btn-wp:hover{background:#075e54}
+.btn-phone,.btn-site,.btn-map{background:#2d2d42;color:#ccc;border:1px solid #3a3a55}
+.btn-phone:hover,.btn-site:hover,.btn-map:hover{color:#fff;border-color:#6c63ff}
+.btn-load-more{background:#6c63ff;color:#fff;border:none;padding:14px 36px;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.btn-load-more:hover{background:#7d75ff}
+.site-footer{background:#111118;border-top:1px solid #222;padding:20px 0;text-align:center;font-size:.8rem;color:#555}
+.site-footer a{color:#6c63ff}
+@media(max-width:600px){.site-nav{display:none}}
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <div class="logo">&#128205; Guarulhos <strong>Aberta</strong></div>
+    <nav class="site-nav"><a href="#empresas">Empresas</a><a href="#categorias">Categorias</a><a href="mailto:contato@guarulhosaberta.com.br">Cadastrar empresa</a></nav>
+  </div>
+</header>
 
-    <main>
-      <section class="hero" id="explorar">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow"><span class="live-dot"></span> Diretório local em beta</p>
-            <h1>Encontre quem<br><em>faz Guarulhos</em> acontecer.</h1>
-            <p class="hero-lede">Empresas, serviços e lugares da cidade em uma busca simples, rápida e transparente.</p>
-            <form class="search-box" id="search-form" role="search">
-              <label class="sr-only" for="search-input">Busque empresa, serviço ou bairro</label>
-              <span class="search-icon" aria-hidden="true">⌕</span>
-              <input id="search-input" name="q" autocomplete="off" placeholder="Busque empresa, serviço ou bairro" />
-              <button type="submit">Buscar</button>
-            </form>
-            <div class="quick-links" aria-label="Buscas populares">
-              <span>Popular:</span>
-              <button type="button" data-query="motoboy">Motoboy</button>
-              <button type="button" data-query="ótica">Óticas</button>
-              <button type="button" data-query="hotel">Hotéis</button>
-              <button type="button" data-query="contabilidade">Contabilidade</button>
-            </div>
-          </div>
-          <div class="hero-note" aria-label="Resumo do diretório">
-            <div class="note-top"><span class="pin">✦</span><span>GUARULHOS / SP</span></div>
-            <div class="city-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <p>Uma vitrine local feita para conectar moradores, empresas e oportunidades.</p>
-            <a href="#como-funciona">Entenda a fonte dos dados <span>↗</span></a>
-          </div>
-        </div>
-      </section>
+<section class="hero">
+  <div class="container">
+    <h1>Encontre empresas em <span class="highlight">Guarulhos</span></h1>
+    <p class="hero-sub">2.000+ negocios reais cadastrados. Restaurantes, farmacias, lojas, servicos e muito mais.</p>
+    <div class="search-wrap">
+      <input id="search" type="text" placeholder="Buscar empresa, categoria ou bairro..." autocomplete="off">
+      <button onclick="doSearch()">Buscar</button>
+    </div>
+    <div class="stats-bar">
+      <span id="stat-total">Carregando...</span>
+      <span>|</span><span id="stat-cats">...</span>
+      <span>|</span><span>OpenStreetMap / ODbL 1.0</span>
+    </div>
+  </div>
+</section>
 
-      <section class="category-strip" aria-label="Categorias">
-        <div class="section-wrap category-inner">
-          <span class="category-label">Explore por categoria</span>
-          <div class="category-list">
-            <button data-query="alimentação">🍴 Alimentação</button>
-            <button data-query="saúde">✚ Saúde</button>
-            <button data-query="compras">▣ Compras</button>
-            <button data-query="serviços">⚒ Serviços</button>
-            <button data-query="logística">↗ Logística</button>
-            <button data-query="hotéis">⌂ Hotéis</button>
-          </div>
-        </div>
-      </section>
+<section id="categorias" class="section-cats">
+  <div class="container"><h2>Categorias</h2><div id="cat-grid" class="cat-grid"></div></div>
+</section>
 
-      <section class="results-section section-wrap" aria-labelledby="results-title">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow dark">BUSCA LOCAL</p>
-            <h2 id="results-title">Lugares para começar</h2>
-          </div>
-          <p class="result-meta" id="result-meta">Consulta oficial quando disponível · dados sujeitos a atualização</p>
-        </div>
-        <div class="status" id="status" role="status" aria-live="polite"></div>
-        <div class="cards" id="results" aria-live="polite"></div>
-        <button class="load-more" id="load-more" type="button" hidden>Carregar mais resultados</button>
-      </section>
+<section id="empresas" class="section-list">
+  <div class="container">
+    <div class="list-header"><h2 id="list-title">Todas as empresas</h2><span id="result-count" class="result-count"></span></div>
+    <div id="company-grid" class="company-grid"></div>
+    <div id="load-more-wrap" style="text-align:center;margin-top:32px;display:none">
+      <button id="load-more-btn" class="btn-load-more" onclick="loadMore()">Mostrar mais</button>
+    </div>
+  </div>
+</section>
 
-      <section class="trust-section" id="como-funciona">
-        <div class="section-wrap trust-grid">
-          <div>
-            <p class="eyebrow dark">TRANSPARÊNCIA PRIMEIRO</p>
-            <h2>Informação local sem caixa-preta.</h2>
-          </div>
-          <div class="trust-items">
-            <article><span>01</span><h3>Fonte identificada</h3><p>Registros exibem origem e data de atualização. A consulta oficial usa API autorizada quando configurada; enquanto isso, dados demonstrativos ficam claramente identificados.</p></article>
-            <article><span>02</span><h3>Sem cadastro inventado</h3><p>Não criamos avaliações, fotos ou empresas. Dados demonstrativos aparecem marcados enquanto o projeto está em validação.</p></article>
-            <article><span>03</span><h3>Correção aberta</h3><p>Encontrou informação desatualizada? Envie uma solicitação e nossa equipe revisa a fonte.</p></article>
-          </div>
-        </div>
-      </section>
+<footer class="site-footer">
+  <div class="container"><p>2026 Guarulhos Aberta | Dados: <a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap (ODbL 1.0)</a> | <a href="mailto:contato@guarulhosaberta.com.br">Corrigir/remover empresa</a></p></div>
+</footer>
 
-      <section class="correction section-wrap" id="cadastrar">
-        <div>
-          <p class="eyebrow dark">EMPRESÁRIOS</p>
-          <h2>Seu negócio merece ser encontrado.</h2>
-          <p>Em breve, empresas poderão solicitar correções, indicar site oficial e acompanhar a atualização do cadastro.</p>
-        </div>
-        <a class="button secondary" href="mailto:contato@guarulhosaberta.com.br?subject=Correção%20de%20cadastro">Solicitar correção <span>→</span></a>
-      </section>
-    </main>
+<script>
+var CI={"restaurantes":"R","alimentacao":"F","moda":"G","financas":"B","automoveis":"C","shopping":"S","bares":"P","supermercados":"M","saude":"H","hospedagem":"H","religiao":"I","servicos-publicos":"SP","mercados":"ME","beleza":"BE","esportes":"E","tecnologia":"T","servicos":"SV","transporte":"TR","turismo":"TU","educacao":"ED","postos":"PC","artesanato":"A","escritorios":"ES","outros":"O"};
+var CL={"restaurantes":"Restaurantes","alimentacao":"Alimentacao","moda":"Moda","financas":"Financas","automoveis":"Automoveis","shopping":"Shopping","bares":"Bares","supermercados":"Supermercados","saude":"Saude","hospedagem":"Hospedagem","religiao":"Igrejas","servicos-publicos":"Servicos Publicos","mercados":"Mercados","beleza":"Beleza","esportes":"Esportes","tecnologia":"Tecnologia","servicos":"Servicos","transporte":"Transporte","turismo":"Turismo","educacao":"Educacao","postos":"Postos","artesanato":"Artesanato","escritorios":"Escritorios","outros":"Outros"};
+var all=[],filtered=[],displayed=0,activeCat=null,PAGE=48;
 
-    <footer class="footer">
-      <div class="section-wrap footer-inner">
-        <span class="brand footer-brand"><span class="brand-mark">G</span><strong>Guarulhos</strong> Aberta</span>
-        <span>Diretório local independente · Guarulhos, SP</span>
-        <span>© 2026</span>
-      </div>
-    </footer>
-    <script src="/app.js" defer></script>
-  </body>
+fetch("data/companies.json").then(function(r){return r.json();}).then(function(data){
+  all=data;
+  var cats=[...new Set(all.map(function(c){return c.category;}))];
+  document.getElementById("stat-total").textContent=all.length.toLocaleString("pt-BR")+" empresas";
+  document.getElementById("stat-cats").textContent=cats.length+" categorias";
+  buildCatGrid();applyFilter();
+}).catch(function(e){document.getElementById("stat-total").textContent="Erro ao carregar dados.";});
+
+function buildCatGrid(){
+  var counts={};
+  all.forEach(function(c){counts[c.category]=(counts[c.category]||0)+1;});
+  var sorted=Object.entries(counts).sort(function(a,b){return b[1]-a[1];});
+  var html=sorted.slice(0,22).map(function(x){
+    return '<button class="cat-pill" data-cat="'+x[0]+'" onclick="filterCat(\'"+x[0]+"\')">'+(CL[x[0]]||x[0])+' <span class="cat-count">'+x[1]+'</span></button>';
+  }).join("")+'<button class="cat-pill" onclick="filterCat(null)">Tudo <span class="cat-count">'+all.length+'</span></button>';
+  document.getElementById("cat-grid").innerHTML=html;
+}
+
+function filterCat(cat){
+  activeCat=cat;
+  document.querySelectorAll(".cat-pill").forEach(function(b){b.classList.toggle("active",b.dataset.cat===cat);});
+  document.getElementById("search").value="";
+  document.getElementById("list-title").textContent=cat?(CL[cat]||cat):"Todas as empresas";
+  applyFilter();
+}
+
+function doSearch(){
+  activeCat=null;
+  document.querySelectorAll(".cat-pill").forEach(function(b){b.classList.remove("active");});
+  applyFilter();
+}
+
+function applyFilter(){
+  var q=document.getElementById("search").value.toLowerCase().trim();
+  filtered=all.filter(function(c){
+    if(activeCat&&c.category!==activeCat)return false;
+    if(q){var h=((c.name||"")+" "+(c.category_label||"")+" "+(c.neighbourhood||"")+" "+(c.address||"")+" "+(c.city||"")).toLowerCase();return h.indexOf(q)!==-1;}
+    return true;
+  });
+  displayed=0;
+  document.getElementById("company-grid").innerHTML="";
+  document.getElementById("result-count").textContent=filtered.length.toLocaleString("pt-BR")+" resultado(s)";
+  renderPage();
+}
+
+function renderPage(){
+  var chunk=filtered.slice(displayed,displayed+PAGE);
+  var grid=document.getElementById("company-grid");
+  chunk.forEach(function(c){grid.insertAdjacentHTML("beforeend",renderCard(c));});
+  displayed+=chunk.length;
+  var wrap=document.getElementById("load-more-wrap");
+  if(displayed<filtered.length){wrap.style.display="block";document.getElementById("load-more-btn").textContent="Mostrar mais ("+(filtered.length-displayed)+" restantes)";}
+  else wrap.style.display="none";
+}
+
+function loadMore(){renderPage();}
+
+function renderCard(c){
+  var addr=[c.address,c.neighbourhood,c.city+"/SP"].filter(Boolean).join(" - ");
+  var ph=c.phone?"<a class='btn-contact btn-phone' href='tel:"+c.phone+"'>Tel: "+c.phone+"</a>":"";
+  var wp=c.whatsapp?"<a class='btn-contact btn-wp' href='"+c.whatsapp+"' target='_blank'>WhatsApp</a>":"";
+  var st=c.website?"<a class='btn-contact btn-site' href='"+c.website+"' target='_blank'>Site</a>":"";
+  var mp=(c.lat&&c.lng)?"<a class='btn-contact btn-map' href='https://www.openstreetmap.org/?mlat="+c.lat+"&mlon="+c.lng+"#map=17/"+c.lat+"/"+c.lng+"' target='_blank'>Mapa</a>":"";
+  return "<div class='company-card'><div class='card-cat-badge'>"+(CL[c.category]||c.category_label||"")+"</div><h3 class='card-name'>"+c.name+"</h3>"+(addr?"<p class='card-addr'>"+addr+"</p>":"")+"<div class='card-actions'>"+wp+ph+st+mp+"</div></div>";
+}
+
+document.getElementById("search").addEventListener("keydown",function(e){if(e.key==="Enter")doSearch();});
+document.getElementById("search").addEventListener("input",function(){if(!document.getElementById("search").value)applyFilter();});
+</script>
+</body>
 </html>
