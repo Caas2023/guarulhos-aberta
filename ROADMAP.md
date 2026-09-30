@@ -50,7 +50,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - [ ] Categorias e bairros canônicos.
 - [ ] Página individual por empresa.
 - [ ] Página por categoria e bairro.
-- [ ] Sitemap e schema `LocalBusiness` por registro verificável.
+- [ ] Sitemap e schema `LocalBusiness` por registro verificável. (Sitemap XML básico adicionado)
 - [ ] Importador OSM paginado com deduplicação.
 - [ ] Atualização periódica e registro de fonte/data.
 
