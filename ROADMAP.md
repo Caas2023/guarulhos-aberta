@@ -49,7 +49,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - [x] Gerador de Schema JSON-LD (`LocalBusiness` e `BreadcrumbList`) dinâmico por localidade (`lib/schema_generator.js`).
 - Modelo persistente empresa.
 - [ ] Categorias e bairros canônicos.
-- [ ] Página individual por empresa.
+- [x] Página individual por empresa e Endpoint Vercel API (`lib/company.js` e `api/company.js`).
 - [ ] Página por categoria e bairro.
 - [ ] Sitemap e schema `LocalBusiness` por registro verificável. (Sitemap XML básico adicionado)
 - [ ] Importador OSM paginado com deduplicação.
