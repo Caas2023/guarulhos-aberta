@@ -45,7 +45,8 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 
 ### Fase 2 — Catálogo
 
-- [x] Modelo nacional de localidade com IDs IBGE e slugs separados (`data/localities.json`, `lib/localities.js`).
+- [x] Modelo nacional localidade com IDs IBGE slugs separados (`data/localities.json`, `lib/localities.js`).
+- [x] Gerador de Schema JSON-LD (`LocalBusiness` e `BreadcrumbList`) dinâmico por localidade (`lib/schema_generator.js`).
 - Modelo persistente empresa.
 - [ ] Categorias e bairros canônicos.
 - [ ] Página individual por empresa.
