@@ -49,8 +49,19 @@ Não raspar Google Maps. Dados Google só entram via API oficial autorizada. Fal
 
 ## Pendências
 
-- Deploy Vercel.
+- Deploy Vercel (CLI deslogada; autenticar com `vercel login`).
 - Expansão para outras cidades brasileiras.
 - Cadastro/reivindicação de empresas.
 - Atualização periódica da base.
+
+## Sitemap
+
+O `sitemap.xml` na raiz é gerado automaticamente a partir dos dados reais:
+
+```bash
+node scripts/generate-sitemap.js [--base-url https://seudominio.com.br]
+```
+
+Em produção Vercel, `/sitemap.xml` é servido pelo handler `api/sitemap.js` com cache CDN de 1 hora.
+Resultado atual: **1.571 URLs** (homepage + 118 categorias + 1.452 empresas, rotas `/sp/guarulhos/categoria/empresa`).
 

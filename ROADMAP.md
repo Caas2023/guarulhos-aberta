@@ -48,6 +48,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 
 - [x] Modelo nacional localidade com IDs IBGE slugs separados (`data/localities.json`, `lib/localities.js`).
 - [x] Gerador de Schema JSON-LD (`LocalBusiness` e `BreadcrumbList`) dinâmico por localidade (`lib/schema_generator.js`).
+- [x] Sitemap dinâmico nacional com todas as empresas reais: `lib/sitemap_generator.js`, `api/sitemap.js`, `scripts/generate-sitemap.js`. 1.571 URLs (1 homepage + 118 categorias + 1.452 empresas). Rotas IBGE `/sp/guarulhos/categoria/empresa`. 20 testes unitários + integração real.
 - Modelo persistente empresa.
 - [ ] Categorias e bairros canônicos.
 - [x] Página individual por empresa e Endpoint Vercel API (`lib/company.js` e `api/company.js`).

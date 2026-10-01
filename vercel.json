@@ -1,7 +1,11 @@
 {
   "functions": {
-    "api/places.js": { "maxDuration": 10 }
+    "api/places.js": { "maxDuration": 10 },
+    "api/sitemap.js": { "maxDuration": 10 }
   },
+  "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
