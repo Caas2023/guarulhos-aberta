@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cadastrar ou Corrigir Empresa — Guarulhos Aberta</title>
+  <meta name="description" content="Reivindique o controle, cadastre sua empresa ou solicite correção de dados públicos no diretório empresarial de Guarulhos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --n: #102d43; --o: #f47745; --m: #637487; --l: #e4ebef; --bg: #f6f9fb; --g: #16866d; --e: #d13030; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'DM Sans', sans-serif; color: #183044; background: var(--bg); }
+    a { text-decoration: none; color: inherit; }
+    .c { max-width: 1180px; margin: auto; padding: 0 24px; }
+    header { background: white; border-bottom: 1px solid var(--l); }
+    .top { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font: 800 1.2rem Manrope; color: var(--n); }
+    .brand b { color: var(--o); }
+    .mark { display: inline-grid; place-items: center; background: var(--o); color: #fff; border-radius: 10px; width: 36px; height: 36px; margin-right: 8px; }
+    .nav { display: flex; gap: 25px; color: #536778; font-size: .9rem; }
+    .nav a:last-child { border: 1px solid var(--o); padding: 9px 14px; border-radius: 6px; color: var(--o); font-weight: 700; }
+    
+    .hero { background: linear-gradient(115deg, var(--n), #1b4b68); color: #fff; padding: 48px 0; text-align: center; }
+    .hero h1 { font: 800 clamp(1.8rem, 4vw, 2.5rem)/1.1 Manrope; margin-top: 0; }
+    .hero p { color: #d8e7ef; max-width: 500px; margin: 12px auto 0; font-size: 1.05rem; }
+    
+    .main-form { padding: 48px 0; max-width: 600px; margin: 0 auto; }
+    .box { background: #fff; padding: 32px; border-radius: 12px; box-shadow: 0 8px 30px #071a2810; border: 1px solid var(--l); }
+    
+    .form-group { margin-bottom: 20px; text-align: left; }
+    label { display: block; font-size: .85rem; font-weight: 700; margin-bottom: 8px; color: var(--n); }
+    input, select, textarea { 
+      width: 100%; padding: 12px; border: 1px solid #d8e2e8; border-radius: 6px; font: inherit; color: var(--n);
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--o); outline: none; }
+    
+    .radio-group { display: flex; gap: 16px; margin-bottom: 12px; }
+    .radio-card { flex: 1; border: 1px solid var(--l); border-radius: 6px; padding: 16px; cursor: pointer; text-align: center; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; background: #fff; }
+    .radio-card input { width: auto; cursor: pointer; }
+    .radio-card:has(input:checked) { border-color: var(--o); background: #fff7f3; color: var(--o); }
+    
+    button[type="submit"] {
+      width: 100%; background: var(--o); color: white; border: 0; border-radius: 6px; padding: 14px; font-weight: 700; font-size: 1rem; cursor: pointer; margin-top: 10px;
+    }
+    button[type="submit"]:disabled { background: #dce5e9; cursor: not-allowed; }
+    
+    .msg { padding: 16px; border-radius: 6px; margin-bottom: 24px; display: none; font-weight: 500; font-size: 0.9rem; }
+    .msg.error { background: #fcebeb; color: var(--e); border: 1px solid #fad2d2; display: block; }
+    .msg.success { background: #e9f8f3; color: var(--g); border: 1px solid #c8eee1; display: block; }
+
+    footer { background: #0b2233; color: #a9c1cc; padding: 25px 0; font-size: .8rem; text-align: center; margin-top: 48px; }
+    footer a { color: #ff9a70; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="c top">
+    <a class="brand" href="/"><span class="mark">⌕</span>Guarulhos <b>Aberta</b></a>
+    <nav class="nav"><a href="/">Voltar ao início</a></nav>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="c">
+      <h1>Cadastre ou corrija sua empresa</h1>
+      <p>Atualize publicamente os dados de sua operação local. O acesso é exclusivo para representantes legais do negócio.</p>
+    </div>
+  </section>
+
+  <section class="main-form c">
+    <div class="box">
+      <div id="status-msg" class="msg"></div>
+
+      <form id="claim-form" onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label>O que você deseja fazer?</label>
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="claimType" value="claim" checked> Sou o responsável / Cadastrar
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="claimType" value="correction"> Sugerir correção de dados
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="companyName">Nome do Estabelecimento *</label>
+          <input type="text" id="companyName" name="companyName" required placeholder="Como sua empresa é conhecida">
+        </div>
+
+        <div class="form-group">
+          <label for="cnpj">CNPJ (apenas números)</label>
+          <input type="text" id="cnpj" name="cnpj" placeholder="Ex: 12345678000195" pattern="[0-9]{14}" title="14 números do CNPJ">
+        </div>
+
+        <div class="form-group">
+          <label for="municipalityId">Código IBGE do Município *</label>
+          <input type="text" id="municipalityId" name="municipalityId" required value="3518800" readonly style="background:#f4f7f9; color:#637487; cursor:not-allowed;">
+          <small style="color: var(--m); font-size: 0.75rem;">Atualmente as atualizações via painel operam na implantação Guarulhos/SP (IBGE: 3518800).</small>
+        </div>
+
+        <div class="form-group">
+          <label for="companyId">ID do mapeamento (opcional)</label>
+          <input type="text" id="companyId" name="companyId" placeholder="Se você já está no diretório (ex: osm-node-123)">
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--l); margin: 28px 0;">
+
+        <div class="form-group">
+          <label for="claimantName">Seu Nome Completo *</label>
+          <input type="text" id="claimantName" name="claimantName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="claimantEmail">E-mail corporativo ou para contato *</label>
+          <input type="email" id="claimantEmail" name="claimantEmail" required>
+        </div>
+
+        <div class="form-group">
+          <label for="claimantPhone">Telefone / WhatsApp *</label>
+          <input type="text" id="claimantPhone" name="claimantPhone" required placeholder="(11) 99999-9999">
+        </div>
+
+        <div class="form-group">
+          <label for="details">Detalhes (Endereço completo, horários, categorias) *</label>
+          <textarea id="details" name="details" rows="4" required placeholder="Forneça os dados que devem constar no diretório..."></textarea>
+        </div>
+
+        <button type="submit" id="submit-btn">Enviar Solicitação</button>
+      </form>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="c">
+    <span>© 2026 Guarulhos Aberta · Diretório empresarial local</span>
+  </div>
+</footer>
+<script>
+async function submitForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = document.getElementById("submit-btn");
+  const msg = document.getElementById("status-msg");
+  
+  btn.disabled = true;
+  btn.textContent = "Enviando...";
+  msg.className = "msg";
+  msg.textContent = "";
+
+  const payload = {
+    claimType: form.claimType.value,
+    companyName: form.companyName.value,
+    cnpj: form.cnpj.value || undefined,
+    municipalityId: form.municipalityId.value,
+    companyId: form.companyId.value || undefined,
+    claimantName: form.claimantName.value,
+    claimantEmail: form.claimantEmail.value,
+    claimantPhone: form.claimantPhone.value,
+    details: form.details.value,
+  };
+
+  try {
+    const res = await fetch("/api/claim", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Erro ao processar solicitação.");
+    }
+
+    msg.className = "msg success";
+    msg.textContent = data.message || "Solicitação registrada com sucesso e aguardando verificação.";
+    form.reset();
+  } catch (err) {
+    msg.className = "msg error";
+    msg.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Enviar Solicitação";
+  }
+}
+</script>
+</body>
+</html>
