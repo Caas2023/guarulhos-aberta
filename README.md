@@ -10,6 +10,8 @@ Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 - Cards mostram telefone, WhatsApp, site e mapa quando o dado existe na fonte.
 - Fonte, licença ODbL, data e cobertura limitada devem permanecer visíveis.
 - Não afirmar cobertura total: OSM depende do que foi mapeado e não representa todas as empresas.
+- Endpoint de reivindicação/correção valida localidade IBGE, e-mail, sanitização e dígitos verificadores do CNPJ.
+- A persistência de reivindicações depende da camada de armazenamento Vercel ainda pendente.
 
 ## Desenvolvimento local
 

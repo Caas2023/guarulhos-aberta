@@ -12,7 +12,7 @@ test("validateAndProcessClaim - processa reivindicação válida com localidade 
     claimantEmail: "caasandrade@gmail.com",
     claimantPhone: "11999998888",
     claimType: "claim",
-    cnpj: "12.345.678/0001-95",
+    cnpj: "27.865.757/0001-02",
     details: "Solicitação de reivindicação oficial do perfil da empresa.",
   };
 
@@ -24,7 +24,7 @@ test("validateAndProcessClaim - processa reivindicação válida com localidade 
   assert.equal(result.locality.municipalityName, "Guarulhos");
   assert.equal(result.locality.stateCode, "SP");
   assert.equal(result.company.id, "osm-node-123456");
-  assert.equal(result.company.cnpj, "12345678000195");
+  assert.equal(result.company.cnpj, "27865757000102");
   assert.equal(result.claimant.email, "caasandrade@gmail.com");
   assert.equal(result.claimType, "claim");
 });
@@ -45,6 +45,25 @@ test("validateAndProcessClaim - rejeita payload sem municipalityId IBGE válido"
     message: /Município IBGE inválido ou não cadastrado/,
   });
 });
+
+test("validateAndProcessClaim - rejeita CNPJ com dígitos verificadores inválidos", () => {
+  const payload = {
+    municipalityId: "3518800",
+    companyId: "osm-node-1",
+    companyName: "Empresa Teste",
+    claimantName: "Ana Silva",
+    claimantEmail: "ana@example.com",
+    claimType: "claim",
+    cnpj: "27865757000103",
+    details: "Solicitação de reivindicação com CNPJ inválido.",
+  };
+
+  assert.throws(() => validateAndProcessClaim(payload), {
+    name: "Error",
+    message: /CNPJ inválido/,
+  });
+});
+
 
 test("validateAndProcessClaim - rejeita e-mail inválido ou detalhes curtos", () => {
   const payloadBadEmail = {
