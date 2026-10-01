@@ -52,7 +52,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - Modelo persistente empresa.
 - [ ] Categorias e bairros canônicos.
 - [x] Página individual por empresa e Endpoint Vercel API (`lib/company.js` e `api/company.js`).
-- [ ] Página por categoria e bairro.
+- [x] Página por categoria: `lib/category_page.js` e `api/category.js`. Gera ItemList + BreadcrumbList schema, paginação, proveniência ODbL. 26 testes. Rota nacional IBGE sem Guarulhos fixo.
 - [ ] Sitemap e schema `LocalBusiness` por registro verificável. (Sitemap XML básico adicionado)
 - [ ] Importador OSM paginado com deduplicação.
 - [ ] Atualização periódica e registro de fonte/data.

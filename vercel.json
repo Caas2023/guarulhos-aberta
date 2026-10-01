@@ -1,7 +1,8 @@
 {
   "functions": {
     "api/places.js": { "maxDuration": 10 },
-    "api/sitemap.js": { "maxDuration": 10 }
+    "api/sitemap.js": { "maxDuration": 10 },
+    "api/category.js": { "maxDuration": 10 }
   },
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" }

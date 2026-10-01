@@ -28,8 +28,16 @@ O piloto usa código IBGE, nomes separados de slugs e rotas `/estado/cidade/cate
 ## Testes
 
 ```bash
-node --test test/company.test.js test/localities.test.js test/routing.test.js test/schema_generator.test.js
+node test/company.test.js
+node test/localities.test.js
+node test/routing.test.js
+node test/schema_generator.test.js
+node test/sitemap.test.js
+node test/claim.test.js
+node test/category.test.js
 ```
+
+Suíte completa (26 testes por módulo, 76+ no total).
 
 ## Deploy
 
