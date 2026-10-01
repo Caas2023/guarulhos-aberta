@@ -97,6 +97,20 @@ test("validateAndProcessClaim - rejeita e-mail inválido ou detalhes curtos", ()
   });
 });
 
+test("validateAndProcessClaim - rejeita campos longos e telefone com formato inválido", () => {
+  const base = {
+    municipalityId: "3518800",
+    companyId: "osm-node-1",
+    companyName: "Empresa Teste",
+    claimantName: "Ana Silva",
+    claimantEmail: "ana@example.com",
+    claimType: "claim",
+    details: "Descrição válida para a solicitação.",
+  };
+
+  assert.throws(() => validateAndProcessClaim({ ...base, details: "x".repeat(4001) }), /details excede o limite de 4000/);
+  assert.throws(() => validateAndProcessClaim({ ...base, claimantPhone: "telefone inválido!" }), /claimantPhone deve conter/);
+});
 test("api/claim handler - método POST retorna 201 e JSON estruturado", async () => {
   const req = {
     method: "POST",

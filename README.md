@@ -12,6 +12,7 @@ Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 - Não afirmar cobertura total: OSM depende do que foi mapeado e não representa todas as empresas.
 - Endpoint de reivindicação/correção valida localidade IBGE, e-mail, sanitização e dígitos verificadores do CNPJ.
 - A persistência de reivindicações depende da camada de armazenamento Vercel ainda pendente.
+- O endpoint rejeita campos textuais acima dos limites definidos e telefones com caracteres inválidos antes de qualquer persistência.
 
 ## Desenvolvimento local
 

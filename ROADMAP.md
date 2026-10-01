@@ -67,6 +67,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - Painel empresário.
 - [x] Correção, remoção e trilha de auditoria estruturada (pending_verification com sanitização e CNPJ).
 - [x] Validação dos dígitos verificadores do CNPJ antes de aceitar reivindicações.
+- [x] Limites de tamanho e formato para entrada de reivindicações.
 
 ### Fase 4 — Receita
 
