@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel do Fornecedor | Guarulhos Aberta</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --navy:#102d43; --orange:#f47745; --bg:#f4f7fa; --white:#fff; --muted:#637487; --line:#e4ebef; --green:#16866d; }
+    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--navy); margin:0; display:flex; }
+    .sidebar { width:260px; background:var(--navy); color:white; height:100vh; position:fixed; display:flex; flex-direction:column; }
+    .sidebar .brand { padding:24px; font-family:Manrope; font-size:1.2rem; font-weight:800; border-bottom:1px solid #1c4a6a; }
+    .sidebar .brand span { color:var(--orange); }
+    .sidebar nav { flex:1; padding:20px 0; }
+    .sidebar nav a { display:flex; align-items:center; gap:12px; padding:12px 24px; color:#adc5d2; font-size:.9rem; transition:.2s; cursor:pointer; }
+    .sidebar nav a:hover, .sidebar nav a.active { background:#1c4a6a; color:white; }
+    .sidebar .user-info { padding:20px; background:#0b2233; border-top:1px solid #1c4a6a; font-size:.85rem; }
+    .main-content { margin-left:260px; width:100%; padding:40px; }
+    .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; }
+    .header h1 { font-family:Manrope; font-size:1.8rem; color:var(--navy); }
+    .card { background:white; border:1px solid var(--line); border-radius:12px; padding:24px; box-shadow:0 4px 12px #0000000a; }
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom:32px; }
+    .stat-card { background:white; padding:20px; border-radius:12px; border:1px solid var(--line); text-align:center; }
+    .stat-card .val { display:block; font-size:1.8rem; font-weight:800; color:var(--navy); }
+    .stat-card .lbl { font-size:.85rem; color:var(--muted); }
+    .form-group { margin-bottom:16px; }
+    .form-group label { display:block; font-size:.85rem; font-weight:600; margin-bottom:6px; color:var(--navy); }
+    .form-group input, .form-group textarea, .form-group select { width:100%; padding:12px; border:1px solid var(--line); border-radius:6px; font:inherit; outline:none; }
+    .form-group input:focus { border-color:var(--orange); }
+    .btn { padding:12px 24px; border-radius:6px; font-weight:700; cursor:pointer; border:0; transition:.2s; }
+    .btn-primary { background:var(--orange); color:white; }
+    .btn-primary:hover { background:#ff8b58; }
+    .btn-secondary { background:#edf4f7; color:var(--navy); }
+    .btn-secondary:hover { background:#dbe4ea; }
+    .table { width:100%; border-collapse:collapse; margin-top:20px; }
+    .table th { text-align:left; padding:12px; border-bottom:2px solid var(--line); color:var(--muted); font-size:.85rem; }
+    .table td { padding:12px; border-bottom:1px solid var(--line); font-size:.9rem; }
+    .badge { padding:4px 8px; border-radius:4px; font-size:.75rem; font-weight:700; }
+    .badge-pending { background:#fff3cd; color:#856404; }
+    .badge-approved { background:#d4edda; color:#155724; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="brand">Guarulhos <span>Aberta</span></div>
+  <nav>
+    <a id="nav-home" class="active" onclick="showTab('home')">🏠 Início</a>
+    <a id="nav-profile" onclick="showTab('profile')">🏢 Meu Perfil</a>
+    <a id="nav-services" onclick="showTab('services')">🛠️ Meus Serviços</a>
+    <a id="nav-leads" onclick="showTab('leads')">📩 Leads & Orçamentos</a>
+    <a id="nav-stats" onclick="showTab('stats')">📊 Performance</a>
+  </nav>
+  <div class="user-info">
+    <div id="user-name">...</div>
+    <a href="#" onclick="logout()" style="color:var(--orange); font-size:.8rem; display:block; margin-top:8px">Sair</a>
+  </div>
+</div>
+
+<main class="main-content">
+  <div id="tab-home" class="tab">
+    <div class="header"><h1>Olá, Fornecedor!</h1></div>
+    <div class="stat-grid">
+      <div class="stat-card"><span class="val" id="stat-views">0</span><span class="lbl">Visualizações de Perfil</span></div>
+      <div class="stat-card"><span class="val" id="stat-clicks">0</span><span class="lbl">Cliques em Contato</span></div>
+      <div class="stat-card"><span class="val" id="stat-leads">0</span><span class="lbl">Orçamentos Ativos</span></div>
+    </div>
+    <div class="card">
+      <h3>Resumo da Empresa</h3>
+      <p id="summary-text">Carregando dados do seu perfil...</p>
+      <button class="btn btn-primary" onclick="showTab('profile')">Atualizar Meus Dados</button>
+    </div>
+  </div>
+
+  <div id="tab-profile" class="tab hidden">
+    <div class="header"><h1>Meu Perfil</h1></div>
+    <div class="card">
+      <div class="form-group">
+        <label>Nome da Empresa / Nome Comercial</label>
+        <input id="p-name" type="text">
+      </div>
+      <div class="form-group">
+        <label>Descrição Detalhada (Venda seu peixe!)</label>
+        <textarea id="p-desc" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Endereço Completo</label>
+        <input id="p-addr" type="text">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp (DDD + Número)</label>
+        <input id="p-wp" type="text">
+      </div>
+      <div class="form-group">
+        <label>Website (URL)</label>
+        <input id="p-site" type="url">
+      </div>
+      <div class="form-group">
+        <label>Foto de Perfil / Logo (URL)</label>
+        <input id="p-logo" type="url">
+      </div>
+      <button class="btn btn-primary" onclick="saveProfile()">Salvar Alterações</button>
+    </div>
+  </div>
+
+  <div id="tab-services" class="tab hidden">
+    <div class="header"><h1>Meus Serviços</h1></div>
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px">
+        <h3>Serviços Oferecidos</h3>
+        <button class="btn btn-primary" onclick="openAddService()">+ Adicionar Serviço</button>
+      </div>
+      <table class="table">
+        <thead><tr><th>Serviço</th><th>Descrição</th><th>Preço Médio</th><th>Ações</th></tr></thead>
+        <tbody id="services-list"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-leads" class="tab hidden">
+    <div class="header"><h1>Leads & Orçamentos</h1></div>
+    <div class="card">
+      <table class="table">
+        <thead><tr><th>Data</th><th>Cliente</th><th>Categoria</th><th>Necessidade</th><th>Status</th><th>Ação</th></tr></thead>
+        <tbody id="leads-list"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-stats" class="tab hidden">
+    <div class="header"><h1>Performance</h1></div>
+    <div class="card">
+      <p>Gráficos de acessos e conversões serão implementados aqui.</p>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Mock de dados iniciais para simulação do Dashboard
+  const mockCompany = {
+    name: "CaaS Express / Motoboy",
+    category: "Logística",
+    address: "Rua Sete de Setembro, 268, Guarulhos/SP",
+    phone: "+55 11 95724-8425",
+    whatsapp: "https://wa.me/5511957248425",
+    website: "https://caasexpresss.com",
+    logo: "https://via.placeholder.com/150",
+    description: "Líder em motofrete B2B em Guarulhos, entregas rápidas e confiáveis.",
+    services: [
+      { name: "Entrega Expressa", desc: "Entrega em até 2h em Guarulhos", price: "R$ 15,00" },
+      { name: "Coleta programada", desc: "Rotas diárias para empresas", price: "A combinar" }
+    ],
+    stats: { views: 1240, clicks: 85, leads: 12 }
+  };
+
+  function showTab(tabId) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.add('hidden'));
+    document.getElementById('tab-' + tabId).classList.remove('hidden');
+    document.querySelectorAll('.sidebar nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById('nav-' + tabId).classList.add('active');
+  }
+
+  function saveProfile() {
+    alert("Dados salvos com sucesso! (Simulado: aguardando integração com backend)");
+  }
+
+  function openAddService() {
+    const name = prompt("Nome do serviço:");
+    if(!name) return;
+    const desc = prompt("Descrição do serviço:");
+    const price = prompt("Preço sugerido (opcional):");
+    
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${name}</td><td>${desc}</td><td>${price}</td><td><button class="btn btn-secondary" onclick="this.parentElement.parentElement.remove()">Remover</button></td>`;
+    document.getElementById('services-list').appendChild(row);
+  }
+
+  function logout() {
+    alert("Saindo...");
+    window.location.href = '/';
+  }
+
+  window.onload = () => {
+    document.getElementById('user-name').textContent = "Olá, " + mockCompany.name;
+    document.getElementById('stat-views').textContent = mockCompany.stats.views;
+    document.getElementById('stat-clicks').textContent = mockCompany.stats.clicks;
+    document.getElementById('stat-leads').textContent = mockCompany.stats.leads;
+    document.getElementById('summary-text').textContent = mockCompany.description + " Localizado em " + mockCompany.address + ".";
+    
+    // Popular serviços
+    mockCompany.services.forEach(s => {
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${s.name}</td><td>${s.desc}</td><td>${s.price}</td><td><button class="btn btn-secondary" onclick="this.parentElement.parentElement.remove()">Remover</button></td>`;
+      document.getElementById('services-list').appendChild(row);
+    });
+
+    // Popular leads simulados
+    const leads = [
+      { date: '2026-10-01', client: 'Empresa A', cat: 'Logística', msg: 'Preciso de 5 entregas diárias', status: 'pending' },
+      { date: '2026-09-30', client: 'Clínica B', cat: 'Coletas', msg: 'Orçamento para exames', status: 'approved' }
+    ];
+    leads.forEach(l => {
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${l.date}</td><td>${l.client}</td><td>${l.cat}</td><td>${l.msg}</td><td><span class="badge badge-${l.status}">${l.status}</span></td><td><button class="btn btn-primary" style="padding:5px 10px; font-size:.7rem">Responder</button></td>`;
+      document.getElementById('leads-list').appendChild(row);
+    });
+  };
+</script>
+</body>
+</html>
