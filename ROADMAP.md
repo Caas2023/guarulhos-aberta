@@ -39,6 +39,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - [x] API pública OSM/Overpass.
 - [x] README e regras de compliance.
 - [x] Git local e commits.
+- [x] PRD e roadmap detalhado (`PRD.md`).
 - [ ] Pesquisa INPI e domínio Registro.br.
 - [ ] Publicação GitHub.
 - [ ] Deploy Vercel verificado.
