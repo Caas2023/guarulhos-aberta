@@ -1,6 +1,6 @@
 # Roadmap — Guarulhos Aberta
 
-Atualizado em 29/09/2026.
+Atualizado em 02/10/2026.
 
 ## Nome e posicionamento
 
@@ -12,6 +12,7 @@ Atualizado em 29/09/2026.
 
 ## Próxima tarefa recomendada
 
+- [ ] Persistência do catálogo de empresas compatível com Vercel, sem depender do JSON versionado.
 - [x] Persistência compatível com Vercel para reivindicações/correções via REST KV, com falha fechada (`503`) quando as variáveis não estão configuradas.
 
 ## Progresso recente
