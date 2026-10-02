@@ -44,6 +44,11 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - [ ] Publicação GitHub.
 - [ ] Deploy Vercel verificado.
 
+### Fase 1.1 — SEO técnico
+
+- [x] Homepage com canonical, Open Graph e `WebSite` JSON-LD/`SearchAction`.
+- [ ] Validar produção após domínio definitivo.
+
 ### Fase 2 — Catálogo
 
 - [x] Modelo nacional localidade com IDs IBGE slugs separados (`data/localities.json`, `lib/localities.js`).
