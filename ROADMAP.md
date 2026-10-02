@@ -12,7 +12,7 @@ Atualizado em 29/09/2026.
 
 ## Próxima tarefa recomendada
 
-- [ ] Persistência compatível com Vercel para reivindicações/correções, mantendo validação server-side e sem segredos no repositório.
+- [x] Persistência compatível com Vercel para reivindicações/correções via REST KV, com falha fechada (`503`) quando as variáveis não estão configuradas.
 
 ## Progresso recente
 

@@ -1,4 +1,5 @@
 const { validateAndProcessClaim } = require("../lib/claim_submission");
+const { persistClaim } = require("../lib/claim_store");
 
 module.exports = async function handler(request, response) {
   if (request.method !== "POST") {
@@ -11,13 +12,22 @@ module.exports = async function handler(request, response) {
 
   try {
     const payload = typeof request.body === "string" ? JSON.parse(request.body) : request.body;
-    const result = validateAndProcessClaim(payload);
+    const claim = validateAndProcessClaim(payload);
+    const persistence = await persistClaim(claim);
     return response.status(201).json({
       success: true,
       message: "Solicitação registrada com sucesso e aguardando verificação.",
-      claim: result,
+      claim,
+      persistence,
     });
   } catch (err) {
+    if (err.code === "PERSISTENCE_NOT_CONFIGURED" || err.code === "PERSISTENCE_WRITE_FAILED") {
+      return response.status(503).json({
+        success: false,
+        error: "Service Unavailable",
+        message: "Persistência temporariamente indisponível; nenhuma solicitação foi confirmada.",
+      });
+    }
     if (err instanceof TypeError || err.message.includes("obrigatório") || err.message.includes("inválido") || err.message.includes("caracteres")) {
       return response.status(400).json({
         success: false,

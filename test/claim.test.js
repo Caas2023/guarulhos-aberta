@@ -111,7 +111,7 @@ test("validateAndProcessClaim - rejeita campos longos e telefone com formato inv
   assert.throws(() => validateAndProcessClaim({ ...base, details: "x".repeat(4001) }), /details excede o limite de 4000/);
   assert.throws(() => validateAndProcessClaim({ ...base, claimantPhone: "telefone inválido!" }), /claimantPhone deve conter/);
 });
-test("api/claim handler - método POST retorna 201 e JSON estruturado", async () => {
+test("api/claim handler - método POST sem KV retorna 503 sem confirmar persistência", async () => {
   const req = {
     method: "POST",
     body: {
@@ -142,10 +142,10 @@ test("api/claim handler - método POST retorna 201 e JSON estruturado", async ()
 
   await claimHandler(req, res);
 
-  assert.equal(responseStatus, 201);
-  assert.equal(responseData.success, true);
-  assert.equal(responseData.claim.locality.municipalityName, "Guarulhos");
-  assert.equal(responseData.claim.claimType, "correction");
+  assert.equal(responseStatus, 503);
+  assert.equal(responseData.success, false);
+  assert.equal(responseData.error, "Service Unavailable");
+  assert.equal(responseData.claim, undefined);
 });
 
 test("api/claim handler - método GET retorna 405 Method Not Allowed", async () => {

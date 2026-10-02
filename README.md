@@ -11,7 +11,7 @@ Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 - Fonte, licença ODbL, data e cobertura limitada devem permanecer visíveis.
 - Não afirmar cobertura total: OSM depende do que foi mapeado e não representa todas as empresas.
 - Endpoint de reivindicação/correção valida localidade IBGE, e-mail, sanitização e dígitos verificadores do CNPJ.
-- A persistência de reivindicações depende da camada de armazenamento Vercel ainda pendente.
+- A persistência de reivindicações depende da camada de armazenamento Vercel agora implementada em `lib/claim_store.js`; sem `KV_REST_API_URL` e `KV_REST_API_TOKEN`, `POST /api/claim` retorna `503` e não confirma o protocolo.
 - O endpoint rejeita campos textuais acima dos limites definidos e telefones com caracteres inválidos antes de qualquer persistência.
 
 ## Referências de design e acessibilidade
