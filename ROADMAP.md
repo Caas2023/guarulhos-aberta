@@ -10,6 +10,15 @@ Atualizado em 29/09/2026.
 - Nome continua provisório até pesquisa de marca no INPI e consulta direta de domínio no Registro.br.
 - Promessa: localizar empresas e serviços de Guarulhos com fonte e atualização transparentes.
 
+## Próxima tarefa recomendada
+
+- [ ] Persistência compatível com Vercel para reivindicações/correções, mantendo validação server-side e sem segredos no repositório.
+
+## Progresso recente
+
+- [x] Acessibilidade básica da homepage: labels explícitos, tipos/autocomplete nos controles e teste automatizado (`test/accessibility.test.js`).
+- [x] JSON-LD `WebSite` da homepage corrigido para contexto Schema.org válido.
+
 ## Arquitetura atual
 
 - Frontend estático: `index.html`, `styles.css`, `app.js`.

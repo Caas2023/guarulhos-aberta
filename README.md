@@ -14,6 +14,11 @@ Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 - A persistência de reivindicações depende da camada de armazenamento Vercel ainda pendente.
 - O endpoint rejeita campos textuais acima dos limites definidos e telefones com caracteres inválidos antes de qualquer persistência.
 
+## Referências de design e acessibilidade
+
+- [W3C WAI — Labeling Controls](https://www.w3.org/WAI/tutorials/forms/labels/): cada controle de busca/filtro tem `label` associado; rótulos visuais foram mantidos quando já faziam parte do fluxo.
+- [W3C WCAG 2.2 — Labels or Instructions](https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html): nomes acessíveis explícitos para busca, categoria e contato.
+- Direção visual: editorial urbano + mapa noturno, com azul-petróleo, laranja de ação e verde para dados abertos; a pesquisa permanece a ação dominante.
 ## Desenvolvimento local
 
 Servidor estático simples:
@@ -38,6 +43,7 @@ node test/schema_generator.test.js
 node test/sitemap.test.js
 node test/claim.test.js
 node test/category.test.js
+node test/accessibility.test.js
 ```
 
 Suíte completa (26 testes por módulo, 76+ no total).
