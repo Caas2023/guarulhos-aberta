@@ -15,6 +15,8 @@ Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 - A camada de persistência do catálogo nacional de empresas (`lib/company_store.js`) suporta Vercel KV / Upstash Redis REST com particionamento por código IBGE, indexação de slugs por categoria e pipeline em lote (`saveCompaniesBatch`); opera com fallback limpo na cidade-piloto e isolamento estrito entre municípios.
 - A API de empresa (`api/company.js`) consulta a persistência nacional e retorna 404 para slugs inexistentes sem criação sintética indevida de dados.
 - A API de categoria (`api/category.js`) consome o catálogo nacional particionado por IBGE em vez de depender de arquivo estático único versionado no Git.
+- O endpoint de busca de locais (`api/places.js`) opera em arquitetura nacional: consulta primeiramente o catálogo persistente nacional particionado por código IBGE (`lib/company_store.js`) e só consulta o OpenStreetMap sob demanda quando o catálogo local não tiver registros, com filtragem administrativa correta e compatibilidade regressiva na cidade-piloto.
+- O sincronizador e importador OpenStreetMap (`lib/osm_importer.js` e `scripts/sync_osm_companies.js`) suporta qualquer município do Brasil via IBGE, com extração e sanitização de contatos, deduplicação espacial/ID, categorização pt-BR e carga em lotes (batching) na camada de persistência.
 - O endpoint rejeita campos textuais acima dos limites definidos e telefones com caracteres inválidos antes de qualquer persistência.
 
 ## Referências de design e acessibilidade
@@ -49,9 +51,11 @@ node test/claim.test.js
 node test/claim_store.test.js
 node test/category.test.js
 node test/accessibility.test.js
+node test/osm_importer.test.js
+node test/places.test.js
 ```
 
-Suíte completa (26 testes por módulo, 76+ no total).
+Suíte completa (101 testes automatizados em 12 suítes).
 
 ## Deploy
 

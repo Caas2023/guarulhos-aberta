@@ -12,15 +12,18 @@ Atualizado em 02/10/2026.
 
 ## Próxima tarefa recomendada
 
-- [ ] Importador e sincronizador de dados OSM com paginação, deduplicação e carga em lote no catálogo persistente (`lib/company_store.js`).
+- [ ] Categorias e bairros canônicos nacionais (normalização e mapeamento de bairros/distritos por código IBGE para filtros avançados de busca).
+- [x] Importador e sincronizador de dados OSM com paginação, deduplicação e carga em lote no catálogo persistente (`lib/osm_importer.js`, `scripts/sync_osm_companies.js`, `api/places.js` nacional com suporte a `company_store`).
 - [x] Persistência do catálogo de empresas compatível com Vercel, sem depender do JSON versionado (`lib/company_store.js` com Vercel KV REST, particionamento IBGE, índice de slug, batch pipeline e fallback).
 - [x] Persistência compatível com Vercel para reivindicações/correções via REST KV, com falha fechada (`503`) quando as variáveis não estão configuradas.
 - [x] APIs de empresa e categoria sem fallback implícito para Guarulhos; localidade é obrigatória por IBGE/slug.
 
 ## Progresso recente
 
-- [x] Acessibilidade básica da homepage: labels explícitos, tipos/autocomplete nos controles e teste automatizado (`test/accessibility.test.js`).
-- [x] JSON-LD `WebSite` da homepage corrigido para contexto Schema.org válido.
+- [x] Sincronizador e importador OpenStreetMap (`lib/osm_importer.js`, `scripts/sync_osm_companies.js`): normalização geográfica territorial, sanitização estrita, formatação de contatos (telefone com DDD, WhatsApp wa.me, URL, e-mail), mapeamento pt-BR, deduplicação espacial/ID e carga em lotes na camada de persistência.
+- [x] `api/places.js` atualizado para arquitetura nacional: consulta prioritária ao catálogo persistente (`company_store`), fallback dinâmico Overpass delimitado por município e compatibilidade com cidade-piloto.
+- [x] Função `getLocalityBySlug` implementada e exportada em `lib/localities.js`.
+- [x] 101 testes automatizados cobrindo todo o pipeline de importação, busca, persistência, sitemap e schemas.
 
 ## Arquitetura atual
 
@@ -71,7 +74,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - [x] Página individual por empresa e Endpoint Vercel API (`lib/company.js` e `api/company.js`).
 - [x] Página por categoria: `lib/category_page.js` e `api/category.js`. Gera ItemList + BreadcrumbList schema, paginação, proveniência ODbL. 26 testes. Rota nacional IBGE sem Guarulhos fixo.
 - [ ] Sitemap e schema `LocalBusiness` por registro verificável. (Sitemap XML básico adicionado)
-- [ ] Importador OSM paginado com deduplicação.
+- [x] Importador OSM paginado com deduplicação e sincronização em lote (`lib/osm_importer.js` e `scripts/sync_osm_companies.js`).
 - [ ] Atualização periódica e registro de fonte/data.
 
 ### Fase 3 Cadastro conta
