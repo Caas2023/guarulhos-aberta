@@ -14,6 +14,7 @@ Atualizado em 02/10/2026.
 
 - [ ] Persistência do catálogo de empresas compatível com Vercel, sem depender do JSON versionado.
 - [x] Persistência compatível com Vercel para reivindicações/correções via REST KV, com falha fechada (`503`) quando as variáveis não estão configuradas.
+- [x] APIs de empresa e categoria sem fallback implícito para Guarulhos; localidade é obrigatória por IBGE/slug.
 
 ## Progresso recente
 

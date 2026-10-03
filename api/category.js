@@ -31,9 +31,6 @@ module.exports = async function handler(request, response) {
     locality = getLocalityByMunicipalityId(municipalityId);
   } else if (stateSlug && municipalitySlug) {
     locality = getLocalityBySlug(stateSlug, municipalitySlug);
-  } else {
-    // Default to pilot city when no locality params supplied
-    locality = getLocalityByMunicipalityId("3518800");
   }
 
   if (!locality) {

@@ -303,6 +303,16 @@ test("api/category handler GET retorna 404 para localidade inexistente", async (
   assert.equal(statusCode, 404);
 });
 
+test("api/category handler sem localidade retorna 404 em vez de escolher o piloto", async () => {
+  const handler = require("../api/category");
+  const req = { method: "GET", query: { categorySlug: "alimentacao" } };
+  let statusCode = null;
+  const res = { status(c) { statusCode = c; return this; }, json() { return this; } };
+
+  await handler(req, res);
+  assert.equal(statusCode, 404);
+});
+
 test("api/category handler POST retorna 405 Method Not Allowed", async () => {
   const handler = require("../api/category");
   const req = { method: "POST", query: {} };

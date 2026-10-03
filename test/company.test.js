@@ -83,6 +83,15 @@ test("api/company handler método GET retorna 200 e dados estruturados da empres
   assert.equal(responseData.schema.localBusiness.name, "Óticas Dyana");
 });
 
+test("api/company handler sem localidade retorna 404 em vez de escolher o piloto", async () => {
+  let statusCode = 0;
+  const req = { method: "GET", query: { name: "Empresa teste" } };
+  const res = { status(code) { statusCode = code; return this; }, json() { return this; } };
+
+  await companyHandler(req, res);
+  assert.equal(statusCode, 404);
+});
+
 test("api/company handler método POST retorna 405 Method Not Allowed", async () => {
   let statusCode = 0;
   let responseData = null;

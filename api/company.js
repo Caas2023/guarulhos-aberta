@@ -17,9 +17,6 @@ module.exports = async function handler(request, response) {
     locality = getLocalityByMunicipalityId(municipalityId);
   } else if (stateSlug && municipalitySlug) {
     locality = getLocalityBySlug(stateSlug, municipalitySlug);
-  } else {
-    // Default fallback to pilot municipality (Guarulhos / IBGE 3518800)
-    locality = getLocalityByMunicipalityId("3518800");
   }
 
   if (!locality) {
