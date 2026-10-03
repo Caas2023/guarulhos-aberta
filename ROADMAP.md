@@ -12,7 +12,8 @@ Atualizado em 02/10/2026.
 
 ## Próxima tarefa recomendada
 
-- [ ] Persistência do catálogo de empresas compatível com Vercel, sem depender do JSON versionado.
+- [ ] Importador e sincronizador de dados OSM com paginação, deduplicação e carga em lote no catálogo persistente (`lib/company_store.js`).
+- [x] Persistência do catálogo de empresas compatível com Vercel, sem depender do JSON versionado (`lib/company_store.js` com Vercel KV REST, particionamento IBGE, índice de slug, batch pipeline e fallback).
 - [x] Persistência compatível com Vercel para reivindicações/correções via REST KV, com falha fechada (`503`) quando as variáveis não estão configuradas.
 - [x] APIs de empresa e categoria sem fallback implícito para Guarulhos; localidade é obrigatória por IBGE/slug.
 
@@ -65,7 +66,7 @@ Guarulhos é cidade-piloto. Arquitetura deverá atender futuramente todas as apr
 - [x] Modelo nacional localidade com IDs IBGE slugs separados (`data/localities.json`, `lib/localities.js`).
 - [x] Gerador de Schema JSON-LD (`LocalBusiness` e `BreadcrumbList`) dinâmico por localidade (`lib/schema_generator.js`).
 - [x] Sitemap dinâmico nacional com todas as empresas reais: `lib/sitemap_generator.js`, `api/sitemap.js`, `scripts/generate-sitemap.js`. 1.571 URLs (1 homepage + 118 categorias + 1.452 empresas). Rotas IBGE `/sp/guarulhos/categoria/empresa`. 20 testes unitários + integração real.
-- Modelo persistente empresa.
+- [x] Modelo persistente empresa: camada de persistência nacional (`lib/company_store.js`) compatível com Vercel KV REST, particionamento por código IBGE, indexação de slug por categoria, suporte a batch pipeline e fallback na cidade-piloto.
 - [ ] Categorias e bairros canônicos.
 - [x] Página individual por empresa e Endpoint Vercel API (`lib/company.js` e `api/company.js`).
 - [x] Página por categoria: `lib/category_page.js` e `api/category.js`. Gera ItemList + BreadcrumbList schema, paginação, proveniência ODbL. 26 testes. Rota nacional IBGE sem Guarulhos fixo.

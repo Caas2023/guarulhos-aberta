@@ -92,6 +92,67 @@ test("api/company handler sem localidade retorna 404 em vez de escolher o piloto
   assert.equal(statusCode, 404);
 });
 
+test("api/company handler consulta empresa real persistida via companySlug", async () => {
+  let statusCode = 0;
+  let responseData = null;
+
+  const req = {
+    method: "GET",
+    query: {
+      municipalityId: "3518800",
+      companySlug: "maria-cereja",
+    },
+  };
+
+  const res = {
+    status(code) {
+      statusCode = code;
+      return this;
+    },
+    json(data) {
+      responseData = data;
+      return this;
+    },
+  };
+
+  await companyHandler(req, res);
+
+  assert.equal(statusCode, 200);
+  assert.equal(responseData.success, true);
+  assert.equal(responseData.company.name, "Maria Cereja");
+  assert.equal(responseData.locality.municipalityName, "Guarulhos");
+  assert.equal(responseData.schema.localBusiness.name, "Maria Cereja");
+});
+
+test("api/company handler retorna 404 para companySlug inexistente sem nome", async () => {
+  let statusCode = 0;
+  let responseData = null;
+
+  const req = {
+    method: "GET",
+    query: {
+      municipalityId: "3518800",
+      companySlug: "empresa-totalmente-inexistente-12345",
+    },
+  };
+
+  const res = {
+    status(code) {
+      statusCode = code;
+      return this;
+    },
+    json(data) {
+      responseData = data;
+      return this;
+    },
+  };
+
+  await companyHandler(req, res);
+
+  assert.equal(statusCode, 404);
+  assert.equal(responseData.error, "Not Found");
+});
+
 test("api/company handler método POST retorna 405 Method Not Allowed", async () => {
   let statusCode = 0;
   let responseData = null;

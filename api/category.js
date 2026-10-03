@@ -12,7 +12,7 @@
 
 const { buildCategoryPageData } = require("../lib/category_page");
 const { getLocalityBySlug, getLocalityByMunicipalityId } = require("../lib/localities");
-const companies = require("../data/companies.json");
+const { listCompanies } = require("../lib/company_store");
 
 module.exports = async function handler(request, response) {
   if (request.method !== "GET") {
@@ -50,6 +50,7 @@ module.exports = async function handler(request, response) {
 
   /* ── build and return ── */
   try {
+    const companies = await listCompanies(locality.municipalityId, { categorySlug });
     const data = buildCategoryPageData({
       categorySlug,
       localityRef: locality,

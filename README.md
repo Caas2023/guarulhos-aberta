@@ -12,8 +12,9 @@ Diretório nacional de empresas, com Guarulhos/SP como cidade-piloto.
 - Não afirmar cobertura total: OSM depende do que foi mapeado e não representa todas as empresas.
 - Endpoint de reivindicação/correção valida localidade IBGE, e-mail, sanitização e dígitos verificadores do CNPJ.
 - A persistência de reivindicações depende da camada de armazenamento Vercel agora implementada em `lib/claim_store.js`; sem `KV_REST_API_URL` e `KV_REST_API_TOKEN`, `POST /api/claim` retorna `503` e não confirma o protocolo.
-- A API de empresa exige `municipalityId` ou `stateSlug` + `municipalitySlug`; não há fallback silencioso para Guarulhos.
-- A API de categoria exige `municipalityId` ou `stateSlug` + `municipalitySlug`; não há fallback silencioso para Guarulhos.
+- A camada de persistência do catálogo nacional de empresas (`lib/company_store.js`) suporta Vercel KV / Upstash Redis REST com particionamento por código IBGE, indexação de slugs por categoria e pipeline em lote (`saveCompaniesBatch`); opera com fallback limpo na cidade-piloto e isolamento estrito entre municípios.
+- A API de empresa (`api/company.js`) consulta a persistência nacional e retorna 404 para slugs inexistentes sem criação sintética indevida de dados.
+- A API de categoria (`api/category.js`) consome o catálogo nacional particionado por IBGE em vez de depender de arquivo estático único versionado no Git.
 - O endpoint rejeita campos textuais acima dos limites definidos e telefones com caracteres inválidos antes de qualquer persistência.
 
 ## Referências de design e acessibilidade
@@ -39,11 +40,13 @@ O piloto usa código IBGE, nomes separados de slugs e rotas `/estado/cidade/cate
 
 ```bash
 node test/company.test.js
+node test/company_store.test.js
 node test/localities.test.js
 node test/routing.test.js
 node test/schema_generator.test.js
 node test/sitemap.test.js
 node test/claim.test.js
+node test/claim_store.test.js
 node test/category.test.js
 node test/accessibility.test.js
 ```
